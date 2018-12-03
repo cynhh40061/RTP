@@ -22,13 +22,13 @@ exports.reelHighRange = 1000;
 exports.reelLowRange = 100;
 
 // 所有測試過的 Reel 組合 JSON 檔
-exports.reelHighRangeJson = {};
+exports.reelAllJson = [];
 // 高賠率 Reel 組合 JSON 檔
-exports.reelNomalRangeJson = {};
+exports.reelHighRangeJson = [];
 // 低賠率 Reel 組合 JSON 檔
-exports.reelLowRangeJson = {};
+exports.reelLowRangeJson = [];
 // 一般賠率 Reel 組合 JSON 檔
-exports.reelAllJson = {};
+exports.reelNomalRangeJson = [];
 
 // 下注金額
 exports.PLAYER_BET = 88;

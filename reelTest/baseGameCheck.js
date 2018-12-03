@@ -24,8 +24,7 @@ getReelRandom = () => {
         rArray.push(randomNum);
     }
 
-    var reelRandomForKey = ''.concat(rArray[0], '|', rArray[1], '|', rArray[2], '|', rArray[3], '|', rArray[4]);
-    reelConsts.reelAllJson[reelRandomForKey] = '';
+    reelConsts.reelAllJson.push(''.concat(rArray[0], '|', rArray[1], '|', rArray[2], '|', rArray[3], '|', rArray[4]));
 
     return obj;
 }
@@ -69,13 +68,12 @@ main = (runTimes) => {
             totalObj[key]['winBonus'] = totalObj[key]['winBonus'] + totalLine;
             totalObj['totalWinBonus'] = totalObj['totalWinBonus'] + totalLine;
 
-            var reelAllJsonKey = Object.keys(reelConsts.reelAllJson);
             if (totalLine > reelConsts.reelHighRange) {
-                reelConsts.reelHighRangeJson[reelAllJsonKey[reelAllJsonKey.length - 1]] = '';
+                reelConsts.reelHighRangeJson.push(reelConsts.reelAllJson[reelConsts.reelAllJson.length - 1]);
             } else if (reelConsts.reelLowRange <= totalLine && totalLine <= reelConsts.reelHighRange) {
-                reelConsts.reelNomalRangeJson[reelAllJsonKey[reelAllJsonKey.length - 1]] = '';
+                reelConsts.reelNomalRangeJson.push(reelConsts.reelAllJson[reelConsts.reelAllJson.length - 1]);
             } else if (totalLine < reelConsts.reelLowRange) {
-                reelConsts.reelLowRangeJson[reelAllJsonKey[reelAllJsonKey.length - 1]] = '';
+                reelConsts.reelLowRangeJson.push(reelConsts.reelAllJson[reelConsts.reelAllJson.length - 1]);
             }
         }
     }
@@ -107,35 +105,20 @@ infoOutput = (times, obj) => {
     }
     str += "--------------------------------------------------------------- \n";
     str += "全部總中獎金額： " + obj["totalWinBonus"] + "\n";
-    str += "RTP： " + (obj["totalWinBonus"] / (times * 88)) + "\n"; 
+    str += "RTP： " + (obj["totalWinBonus"] / (times * 88)) + "\n";
     str += "--------------------------------------------------------------- \n";
 
     var RTPs = Math.floor((obj["totalWinBonus"] / (times * 88)) * 10000) / 10000;
-    reelConsts.reelAllNumObj[RTPs] = getReelKeyArray(reelConsts.reelAllJson);
+    reelConsts.reelAllNumObj[RTPs] = reelConsts.reelAllJson;
     tools.writeFile(urlConstants.ReelAllNumJsonUrl, JSON.stringify(reelConsts.reelAllNumObj));
     console.log(Object.keys(reelConsts.reelAllNumObj));
 
-    reelConsts.reelHighRangeNumObj[RTPs] = getReelKeyArray(reelConsts.reelHighRangeJson);
-    tools.writeFile(urlConstants.ReelHighRangeNumJsonUrl, JSON.stringify(reelConsts.reelHighRangeNumObj));
-    console.log(Object.keys(reelConsts.reelHighRangeNumObj));
+    // reelConsts.reelHighRangeNumObj[RTPs] = getReelKeyArray(reelConsts.reelHighRangeJson);
+    // tools.writeFile(urlConstants.ReelHighRangeNumJsonUrl, JSON.stringify(reelConsts.reelHighRangeNumObj));
+    // console.log(Object.keys(reelConsts.reelHighRangeNumObj));
 
     tools.appendNewFile(__dirname + '/TestFile/Test_測試數' + times + '_' + new Date().getTime() + '.txt', str);
     console.log(RTPs);
-}
-
-/*
-    取出 reelNumObj 的 key 放進 Array 回傳(reelNumObj 用 key value 方式是為了去重複)
-*/
-getReelKeyArray = (obj) => {
-    var arr = [];
-    if (tools.isNull(obj)) {
-        for (var i = 0; i < Object.keys(obj).length; i++) {
-            arr.push(Object.keys(obj)[i]);
-        }
-    } else {
-        arr = [];
-    }
-    return arr;
 }
 
 main(10000);
