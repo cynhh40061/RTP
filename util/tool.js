@@ -111,3 +111,46 @@ exports.checkReelRate = (reelSampling) => {
     // console.log(obj);
     return obj;
 }
+
+/*
+    根據號碼分類中獎
+*/
+exports.winNumberClassify = (winObj) => {
+    var totalObj = reelConsts.totalWinObj;
+    var keys = Object.keys(winObj);
+
+    for (var j = 0; j < keys.length; j++) {
+        var key = keys[j];
+        var thisReelLine = winObj[key]['winBaseLine'] * winObj[key]['winCount'];
+        var thisReelNum = reelConsts.reelAllArray[reelConsts.reelAllArray.length - 1];
+
+        if (winObj[key]['winCombo'] == 3) {
+            totalObj[key]['threeCombo'] = totalObj[key]['threeCombo'] + 1;
+            totalObj[key]['threeComboBonus'] = totalObj[key]['threeComboBonus'] + winObj[key]['winBaseLine'] * winObj[key]['winCount'];
+        } else if (winObj[key]['winCombo'] == 4) {
+            totalObj[key]['fourCombo'] = totalObj[key]['fourCombo'] + 1;
+            totalObj[key]['fourComboBonus'] = totalObj[key]['fourComboBonus'] + winObj[key]['winBaseLine'] * winObj[key]['winCount'];
+        } else if (winObj[key]['winCombo'] == 5) {
+            totalObj[key]['fivesCombo'] = totalObj[key]['fivesCombo'] + 1;
+            totalObj[key]['fivesComboBonus'] = totalObj[key]['fivesComboBonus'] + winObj[key]['winBaseLine'] * winObj[key]['winCount'];
+        }
+
+        totalObj[key]['winBonus'] = totalObj[key]['winBonus'] + thisReelLine;
+        totalObj['totalWinBonus'] = totalObj['totalWinBonus'] + thisReelLine;
+
+        reelClassifyByRange(thisReelLine, thisReelNum);
+    }
+}
+
+/*
+    根據賠率分類 Reel 組合，紀錄到 JSON 檔
+*/
+reelClassifyByRange = (reelLine, reelNum) => {
+    if (reelLine > reelConsts.reelHighRange) {
+        reelConsts.reelHighRangeArray.push(reelNum);
+    } else if (reelConsts.reelLowRange <= reelLine && reelLine <= reelConsts.reelHighRange) {
+        reelConsts.reelNomalRangeArray.push(reelNum);
+    } else if (reelLine < reelConsts.reelLowRange) {
+        reelConsts.reelLowRangeArray.push(reelNum);
+    }
+}

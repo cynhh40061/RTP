@@ -3,7 +3,7 @@ const reelConsts = require('../constants/reelConstants');
 
 
 /*
-    從 reelAllNumObj 取出指定 RTP 對應的測試值，並從中以亂數選則一組回傳 
+    從所有測試過的 Reel 組合中取出指定 RTP，並從中以亂數選則一組回傳 
 */
 getReelRandom = (Num) => {
     var obj = {};
@@ -23,11 +23,12 @@ getReelRandom = (Num) => {
             obj['Reel' + (i + 1)] = [subReel[subReelNum - 1], subReel[subReelNum], subReel[subReelNum + 1]];
         }
     }
+
     return obj;
 }
 
 /*
-    執行指定測試次數，並回傳原 RTP 值與 測試後新 RTP 值
+    main function 執行指定測試次數，並回傳原 RTP 值與 測試後新 RTP 值
 */
 main = (runTimes, Num) => {
     var totalWinBonus = 0;
