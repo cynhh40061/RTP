@@ -43,7 +43,11 @@ main = (runTimes, Num) => {
             var key = Object.keys(winObj)[j];
             var totalLine = winObj[key]['winBaseLine'] * winObj[key]['winCount'];
 
-            totalWinBonus = totalWinBonus + totalLine;
+            if (key == config.SPECIAL_NUMBER && config.FREE_GAME_CHECK_SWITCH) {
+                totalWinBonus = totalWinBonus + totalLine + tools.getFreeGameBouns(0);
+            } else {
+                totalWinBonus = totalWinBonus + totalLine;
+            }
         }
     }
     var newRTP = totalWinBonus / (runTimes * config.PLAYER_BET);
