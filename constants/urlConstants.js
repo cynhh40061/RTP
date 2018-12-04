@@ -8,3 +8,6 @@ exports.ReelHighRangeNumJsonUrl = "./ReelRangeJson/ReelHighRangeNum.json";
 exports.ReelNomalRangeNumJsonUrl = "./ReelRangeJson/ReelNomalRangeNum.json";
 // 一般賠率 Reel 組合 JSON 檔存放路徑
 exports.ReelLowRangeNumJsonUrl = "./ReelRangeJson/ReelLowRangeNum.json";
+
+// BounsGame1 JSON 檔存放路徑
+exports.BOUNS_GAME_1_URL = "./ReelRangeJson/BounsGame1.json";

@@ -4,6 +4,8 @@ const urlConstants = require('../constants/urlConstants');
 // 讀取 BaseGame JSON 檔
 const jsonObj = JSON.parse(tools.readFile(urlConstants.BaseGameJsonUrl));
 
+// 讀取 BounsGame1 JSON 檔
+exports.BounsGame1Obj = JSON.parse(tools.readFile(urlConstants.BOUNS_GAME_1_URL));
 // 讀取 所有測試過的 Reel 組合 JSON 檔
 exports.reelAllNumObj = JSON.parse(tools.readFile(urlConstants.ReelAllNumJsonUrl));
 // 讀取 高賠率 Reel 組合 JSON 檔
@@ -33,11 +35,6 @@ exports.totalWinObj = {
     totalWinBonus: 0,
 };
 
-// 高賠率範圍
-exports.reelHighRange = 1000;
-// 低賠率範圍
-exports.reelLowRange = 100;
-
 // 所有測試過的 Reel 組合 JSON 檔
 exports.reelAllArray = [];
 // 高賠率 Reel 組合 JSON 檔
@@ -46,9 +43,3 @@ exports.reelHighRangeArray = [];
 exports.reelLowRangeArray = [];
 // 一般賠率 Reel 組合 JSON 檔
 exports.reelNomalRangeArray = [];
-
-// 下注金額
-exports.PLAYER_BET = 88;
-
-
-

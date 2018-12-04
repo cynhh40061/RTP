@@ -1,10 +1,12 @@
 const tools = require('../util/tool');
 const reelConsts = require('../constants/reelConstants');
+const config = require('../config');
 
-
-/*
-    從所有測試過的 Reel 組合中取出指定 RTP，並從中以亂數選則一組回傳 
-*/
+/**
+ * 從所有測試過的 Reel 組合中取出指定 RTP，並從中以亂數選則一組回傳 
+ * @param {number} Num RTP 編號
+ * @returns {object} obj 亂數取出的 Array[5][3]
+ */
 getReelRandom = (Num) => {
     var obj = {};
     var keys = Object.keys(reelConsts.reelAllNumObj);
@@ -27,9 +29,11 @@ getReelRandom = (Num) => {
     return obj;
 }
 
-/*
-    main function 執行指定測試次數，並回傳原 RTP 值與 測試後新 RTP 值
-*/
+/**
+ * main function 執行指定測試次數，並回傳原 RTP 值與 測試後新 RTP 值
+ * @param {number} runTimes 測試次數
+ * @param {number} Num RTP 編號
+ */
 main = (runTimes, Num) => {
     var totalWinBonus = 0;
     for (var i = 1; i <= runTimes; i++) {
@@ -42,7 +46,7 @@ main = (runTimes, Num) => {
             totalWinBonus = totalWinBonus + totalLine;
         }
     }
-    var newRTP = totalWinBonus / (runTimes * reelConsts.PLAYER_BET);
+    var newRTP = totalWinBonus / (runTimes * config.PLAYER_BET);
 
     console.log('oldRTP=', Object.keys(reelConsts.reelAllNumObj)[Num]);
     console.log('newRTP=', newRTP);
@@ -50,5 +54,5 @@ main = (runTimes, Num) => {
 }
 
 for (var i = 0; i < Object.keys(reelConsts.reelAllNumObj).length; i++) {
-    main(10000000, i);
+    main(config.REEL_JSON_RTP_TEST_RUN_TIMES, i);
 }
