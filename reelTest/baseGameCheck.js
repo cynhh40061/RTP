@@ -121,6 +121,7 @@ infoOutput = (times) => {
             str += "單號總中獎金額： " + totalObj[k]["winBonus"] + "\n";
         }
     }
+
     str += "--------------------------------------------------------------- \n";
     str += "全部總中獎金額： " + totalObj["totalWinBonus"] + "\n";
     str += "RTP： " + (totalObj["totalWinBonus"] / (times * config.PLAYER_BET)) + "\n";
@@ -140,10 +141,24 @@ infoOutput = (times) => {
         console.log(Object.keys(reelConsts.reelHighRangeNumObj));
     }
 
+    if (config.BASE_GAME_CHECK_INSERT_NOMAL_RANG_REEL_NUM_SWITCH) {
+        reelConsts.reelNomalRangeNumObj[RTPs] = reelConsts.reelNomalRangeArray;
+        tools.writeFile(urlConstants.ReelNomalRangeNumJsonUrl, JSON.stringify(reelConsts.reelNomalRangeNumObj));
+        console.log(Object.keys(reelConsts.reelNomalRangeNumObj));
+    }
+
+    if (config.BASE_GAME_CHECK_INSERT_LOW_RANG_REEL_NUM_SWITCH) {
+        reelConsts.reelLowRangeNumObj[RTPs] = reelConsts.reelLowRangeArray;
+        tools.writeFile(urlConstants.ReelLowRangeNumJsonUrl, JSON.stringify(reelConsts.reelLowRangeNumObj));
+        console.log(Object.keys(reelConsts.reelLowRangeNumObj));
+    }
+
     if (config.BASE_GAME_CHECK_APPEND_FILE_SWITCH) {
         tools.appendNewFile(__dirname + '/TestFile/Test_測試數' + times + '_' + new Date().getTime() + '.txt', str);
     }
     console.log(RTPs);
 }
+for (let i = 0; i < 10; i++) {
+    main(config.BASE_GAME_CHECK_RUN_TIMES);
+}
 
-main(config.BASE_GAME_CHECK_RUN_TIMES);

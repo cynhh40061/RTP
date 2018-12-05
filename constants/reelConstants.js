@@ -10,6 +10,10 @@ exports.BounsGame1Obj = JSON.parse(tools.readFile(urlConstants.BOUNS_GAME_1_URL)
 exports.reelAllNumObj = JSON.parse(tools.readFile(urlConstants.ReelAllNumJsonUrl));
 // 讀取 高賠率 Reel 組合 JSON 檔
 exports.reelHighRangeNumObj = JSON.parse(tools.readFile(urlConstants.ReelHighRangeNumJsonUrl));
+// 讀取 一般賠率 Reel 組合 JSON 檔
+exports.reelNomalRangeNumObj = JSON.parse(tools.readFile(urlConstants.ReelNomalRangeNumJsonUrl));
+// 讀取 低賠率 Reel 組合 JSON 檔
+exports.reelLowRangeNumObj = JSON.parse(tools.readFile(urlConstants.ReelLowRangeNumJsonUrl));
 
 // 讀取 BaseGame JSON 檔 的 Reel
 exports.reelObj = jsonObj['Reel'];
@@ -18,7 +22,7 @@ exports.mappingTableObj = jsonObj['mappingTable'];
 // 讀取 BaseGame JSON 檔 的 baseLine
 exports.baseLine = jsonObj['baseLine'];
 
-// 
+// 所有號碼中獎紀錄
 exports.totalWinObj = {
     1: { threeCombo: 0, threeComboBonus: 0, fourCombo: 0, fourComboBonus: 0, fivesCombo: 0, fivesComboBonus: 0, winBonus: 0 },
     2: { threeCombo: 0, threeComboBonus: 0, fourCombo: 0, fourComboBonus: 0, fivesCombo: 0, fivesComboBonus: 0, winBonus: 0 },
